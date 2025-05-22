@@ -4,119 +4,473 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Koloni4D – Platform Digital Resmi & Aman</title>
-  <meta name="description" content="Koloni4D adalah platform digital resmi yang menyediakan layanan hiburan modern, aman, dan terpercaya." />
-  <meta name="keywords" content="platform digital, hiburan online, layanan resmi, aman, terpercaya" />
-  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Koloni4D menyediakan platform hiburan digital yang aman, terpercaya, dan modern. Nikmati layanan resmi dengan pengalaman terbaik." />
+  <meta name="keywords" content="koloni4d, platform hiburan digital, layanan resmi, hiburan online, aman, terpercaya" />
   <meta name="google-site-verification" content="MUR8c0594QEs3fp62UNeEkiFnhEdG_Iw08CY4DBTbc8" />
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Koloni4D – Platform Digital Resmi & Aman" />
   <meta property="og:description" content="Akses ke layanan hiburan digital terbaik dan terpercaya." />
   <meta property="og:url" content="https://kolonilanding1.github.io/koloni-buffer/" />
   <meta property="og:type" content="website" />
 
+  
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to bottom right, #f9fafe, #d9e6f2);
-      color: #222;
+    :root {
+      --primary-gradient: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+      --primary-color: #6a11cb;
+      --secondary-color: #2575fc;
+      --bg-color: #f0f4ff;
+      --text-color: #222;
+      --text-secondary: #555;
+      --white: #fff;
+      --shadow-light: rgba(0, 0, 0, 0.08);
+      --shadow-strong: rgba(0, 0, 0, 0.15);
+      --border-radius: 14px;
+      --font-family: 'Inter', sans-serif;
+    }
+
+    * {
       margin: 0;
-      padding: 2rem;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background: var(--bg-color);
+      color: var(--text-color);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      scroll-behavior: smooth;
       line-height: 1.6;
     }
 
-    h1, h2, h3 {
-      text-align: center;
-      font-weight: 600;
-    }
-
-    .section {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-    }
-
-    .button {
-      display: inline-block;
-      background-color: #007bff;
-      color: white;
+    /* Sticky Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: var(--white);
+      width: 100%;
+      max-width: 960px;
       padding: 1rem 2rem;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 1.1rem;
-      font-weight: 600;
-      transition: background 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 5px 10px rgba(0, 123, 255, 0.3);
-      text-align: center;
-      margin-top: 2rem;
+      box-shadow: none;
+      z-index: 10;
+      transition: box-shadow 0.3s ease, background-color 0.3s ease;
+      display: flex;
+      justify-content: center;
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
     }
 
-    .button:hover {
-      background-color: #0056b3;
+    header.scrolled {
+      box-shadow: 0 4px 20px var(--shadow-strong);
+      background-color: var(--white);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      color: var(--primary-color);
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+
+    main.container {
+      max-width: 960px;
+      width: 100%;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Animations on scroll */
+    .fade-slide-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-slide-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Section styling */
+    section {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 30px var(--shadow-light);
+      margin-bottom: 3rem;
+    }
+
+    section h2 {
+      color: var(--primary-color);
+      font-weight: 700;
+      margin-bottom: 1.4rem;
+      text-align: center;
+      font-size: 2rem;
+      letter-spacing: 0.8px;
+    }
+
+    /* Features List */
+    .features-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+      gap: 1.8rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .feature-item {
+      background: #eef3ff;
+      border-radius: 12px;
+      padding: 1.4rem 1.8rem;
+      box-shadow: 0 5px 15px rgba(102, 99, 255, 0.1);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: transform 0.3s ease;
+      cursor: default;
+    }
+
+    .feature-item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(102, 99, 255, 0.3);
+    }
+
+    .feature-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      fill: var(--primary-color);
+      margin-top: 4px;
+    }
+
+    .feature-text {
+      font-size: 1.1rem;
+      color: var(--text-color);
+      font-weight: 600;
+    }
+
+    /* Testimonial Slider */
+    .testimonial-slider {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #f9faff;
+      padding: 2rem 3rem;
+      box-shadow: 0 8px 30px var(--shadow-light);
+    }
+
+    .testimonial-slide {
+      display: none;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      text-align: center;
+      min-height: 120px;
+      line-height: 1.6;
+      transition: opacity 0.5s ease;
+    }
+    .testimonial-slide.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .testimonial-author {
+      margin-top: 1rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    /* Testimonial Nav Buttons */
+    .testimonial-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      gap: 1rem;
+    }
+
+    .testimonial-nav button {
+      background: var(--primary-color);
+      border: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      opacity: 0.5;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+    }
+    .testimonial-nav button.active,
+    .testimonial-nav button:hover {
+      opacity: 1;
+    }
+
+    /* FAQ Accordion */
+    .faq-item {
+      max-width: 720px;
+      margin: 0 auto 1rem;
+      background: #eef3ff;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(39, 78, 169, 0.1);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--primary-color);
+      user-select: none;
+      position: relative;
+      font-size: 1.1rem;
+    }
+
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 1.5rem;
+      font-size: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.open .faq-question::after {
+      content: '−';
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 1.5rem;
+      background: var(--white);
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.5;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 250px;
+      padding: 1rem 1.5rem;
+    }
+
+    /* CTA Button */
+    .btn-primary {
+      display: block;
+      width: fit-content;
+      margin: 2rem auto 0;
+      padding: 1.15rem 3rem;
+      background: var(--primary-gradient);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.3rem;
+      border-radius: 50px;
+      box-shadow: 0 8px 22px var(--primary-color);
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.4s ease, transform 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+    .btn-primary:hover {
+      background: linear-gradient(90deg, #2575fc 0%, #6a11cb 100%);
       transform: scale(1.05);
     }
 
-    ul {
-      padding-left: 1.5rem;
-    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      header {
+        padding: 1rem 1rem;
+        border-radius: 0;
+      }
 
-    .faq {
-      margin-top: 1rem;
-    }
+      main.container {
+        padding: 1.5rem 1rem 3rem;
+      }
 
-    .faq strong {
-      display: block;
-      margin-bottom: 0.5rem;
+      .features-list {
+        grid-template-columns: 1fr;
+      }
+
+      .testimonial-slider {
+        padding: 1.5rem 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="section">
-    <h1>Selamat Datang di Koloni4D</h1>
-    <h2>Platform Digital Aman & Terpercaya</h2>
-    <p>Koloni4D adalah platform hiburan digital yang didesain untuk memberikan pengalaman terbaik kepada pengguna Indonesia. Dengan antarmuka modern dan sistem keamanan canggih, kami menghadirkan layanan yang aman, cepat, dan dapat diandalkan.</p>
-  </div>
+  <header>
+    <h1>Koloni4D</h1>
+  </header>
 
-  <div class="section">
-    <h3>🔍 Fitur Unggulan Koloni4D</h3>
-    <ul>
-      <li>🔐 Sistem keamanan tingkat tinggi</li>
-      <li>⚡ Akses cepat dan ringan di semua perangkat</li>
-      <li>🎯 Layanan 24 jam nonstop</li>
-      <li>📱 Tampilan responsif dan ramah seluler</li>
-    </ul>
-  </div>
+  <main class="container">
+    <section class="fade-slide-up">
+      <h2>Mengenal Koloni4D</h2>
+      <p>
+        Koloni4D adalah platform digital resmi yang menyediakan layanan hiburan modern dengan sistem keamanan terbaik dan kemudahan akses untuk para pengguna.
+      </p>
+    </section>
 
-  <div class="section">
-    <h3>💬 Apa Kata Pengguna Kami?</h3>
-    <p><em>"Saya sudah pakai Koloni4D selama 1 tahun, dan pelayanannya selalu cepat dan profesional!"</em> – Dwi, Surabaya</p>
-    <p><em>"Tampilan modern, mudah digunakan, dan sangat aman. Rekomendasi!"</em> – Raka, Jakarta</p>
-  </div>
+    <section class="fade-slide-up">
+      <h2>Keunggulan Kami</h2>
+      <div class="features-list">
+        <div class="feature-item">
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8z" />
+          </svg>
+          <p class="feature-text">Platform Resmi dan Terpercaya</p>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8z" />
+          </svg>
+          <p class="feature-text">Transaksi Aman dan Cepat</p>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8z" />
+          </svg>
+          <p class="feature-text">Dukungan Pelanggan 24/7</p>
+        </div>
+        <div class="feature-item">
+          <svg class="feature-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm-1 15l-5-5 1.41-1.41L11 14.17l7.59-7.59L20 8z" />
+          </svg>
+          <p class="feature-text">Layanan Hiburan Terlengkap</p>
+        </div>
+      </div>
+    </section>
 
-  <div class="section faq">
-    <h3>❓ Pertanyaan Umum (FAQ)</h3>
-    <p><strong>Apakah Koloni4D gratis untuk diakses?</strong>
-    Ya, Anda dapat mengakses platform kami secara gratis. Beberapa layanan mungkin memerlukan pendaftaran.</p>
+    <section class="fade-slide-up">
+      <h2>Testimonial Pengguna</h2>
+      <div class="testimonial-slider">
+        <div class="testimonial-slide active">
+          "Layanan Koloni4D sangat cepat dan terpercaya. Saya merasa aman menggunakan platform ini." 
+          <div class="testimonial-author">— Andi</div>
+        </div>
+        <div class="testimonial-slide">
+          "Customer service-nya responsif 24 jam, sangat membantu saat ada masalah." 
+          <div class="testimonial-author">— Sari</div>
+        </div>
+        <div class="testimonial-slide">
+          "Banyak pilihan hiburan seru yang bisa saya nikmati kapan saja." 
+          <div class="testimonial-author">— Budi</div>
+        </div>
+        <div class="testimonial-slide">
+          "Platform resmi dengan tampilan modern dan mudah dipakai." 
+          <div class="testimonial-author">— Rina</div>
+        </div>
+      </div>
+      <div class="testimonial-nav" aria-label="Navigasi Testimonial">
+        <button class="active" aria-label="Testimonial 1"></button>
+        <button aria-label="Testimonial 2"></button>
+        <button aria-label="Testimonial 3"></button>
+        <button aria-label="Testimonial 4"></button>
+      </div>
+    </section>
 
-    <p><strong>Apakah Koloni4D aman digunakan?</strong>
-    Kami menggunakan teknologi enkripsi dan sistem keamanan yang telah terverifikasi.</p>
+    <section class="fade-slide-up">
+      <h2>Frequently Asked Questions (FAQ)</h2>
 
-    <p><strong>Apakah platform ini bisa dibuka di HP?</strong>
-    Tentu, Koloni4D sudah dioptimalkan untuk semua ukuran layar termasuk smartphone dan tablet.</p>
-  </div>
+      <div class="faq-item">
+        <div class="faq-question" tabindex="0">Apa itu Koloni4D?</div>
+        <div class="faq-answer">
+          Koloni4D adalah platform digital resmi yang menyediakan berbagai layanan hiburan dan transaksi aman untuk pengguna di Indonesia.
+        </div>
+      </div>
 
-  <div class="section" style="text-align: center;">
-    <h3>🚀 Siap Memulai?</h3>
-    <p>Klik tombol di bawah untuk mengakses platform resmi Koloni4D dan rasakan pengalaman digital terbaik Anda.</p>
-    <a href="https://koloni4d.com" target="_blank" rel="noopener noreferrer" class="button">Masuk ke Platform Resmi</a>
-  </div>
+      <div class="faq-item">
+        <div class="faq-question" tabindex="0">Bagaimana cara melakukan transaksi?</div>
+        <div class="faq-answer">
+          Pengguna dapat melakukan transaksi melalui metode pembayaran yang tersedia di platform kami, dengan sistem keamanan tinggi.
+        </div>
+      </div>
 
+      <div class="faq-item">
+        <div class="faq-question" tabindex="0">Apakah layanan pelanggan tersedia 24 jam?</div>
+        <div class="faq-answer">
+          Ya, tim layanan pelanggan kami siap membantu Anda 24/7 melalui chat dan telepon.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" tabindex="0">Apakah platform ini aman dan resmi?</div>
+        <div class="faq-answer">
+          Platform Koloni4D telah terdaftar resmi dan menggunakan teknologi enkripsi terbaik untuk menjamin keamanan data dan transaksi.
+        </div>
+      </div>
+    </section>
+
+    <a href="#kontak" class="btn-primary" aria-label="Hubungi Kami">Hubungi Kami</a>
+  </main>
+
+  <script>
+    // Header scroll shadow effect
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Fade slide up animation on scroll
+    const fadeEls = document.querySelectorAll('.fade-slide-up');
+    function checkFade() {
+      const triggerBottom = window.innerHeight * 0.85;
+      fadeEls.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < triggerBottom) {
+          el.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', checkFade);
+    window.addEventListener('load', checkFade);
+
+    // Testimonial slider functionality
+    const slides = document.querySelectorAll('.testimonial-slide');
+    const navButtons = document.querySelectorAll('.testimonial-nav button');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+        navButtons[i].classList.toggle('active', i === index);
+      });
+      currentIndex = index;
+    }
+
+    navButtons.forEach((btn, idx) => {
+      btn.addEventListener('click', () => {
+        showSlide(idx);
+      });
+    });
+
+    // FAQ accordion toggle
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        item.classList.toggle('open');
+      });
+      // Also allow keyboard toggle with Enter key
+      question.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          item.classList.toggle('open');
+        }
+      });
+    });
+  </script>
 </body>
 </html>
